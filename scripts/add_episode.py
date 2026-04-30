@@ -45,34 +45,49 @@ def slugify(text: str, max_len: int = 60) -> str:
     return text[:max_len].strip("-").lower() or "episode"
 
 
+# yt-dlp args to bypass YouTube's bot detection on cloud IPs
+# tv_embedded + ios player clients still serve metadata + streams without auth
+YTDLP_BYPASS = [
+    "--extractor-args", "youtube:player_client=tv,ios,web_safari",
+    "--user-agent", "Mozilla/5.0 (iPhone; CPU iPhone OS 17_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Mobile/15E148 Safari/604.1",
+    "--retries", "3",
+    "--sleep-interval", "1",
+]
+
+
+def run_yt_dlp(args, **kw):
+    proc = subprocess.run(
+        ["yt-dlp", *YTDLP_BYPASS, *args],
+        capture_output=True, text=True, **kw,
+    )
+    if proc.returncode != 0:
+        sys.stderr.write(f"yt-dlp failed (rc={proc.returncode})\n")
+        sys.stderr.write("--- stdout ---\n" + proc.stdout[-2000:] + "\n")
+        sys.stderr.write("--- stderr ---\n" + proc.stderr[-2000:] + "\n")
+        raise subprocess.CalledProcessError(proc.returncode, proc.args, proc.stdout, proc.stderr)
+    return proc
+
+
 def fetch_metadata(url: str) -> dict:
     """Use yt-dlp to get video metadata without downloading."""
-    result = subprocess.run(
-        ["yt-dlp", "-J", "--no-warnings", url],
-        capture_output=True, text=True, check=True,
-    )
+    result = run_yt_dlp(["-J", "--no-warnings", url])
     return json.loads(result.stdout)
 
 
 def download_audio(url: str, out_dir: Path) -> Path:
     """Download best audio, encode to 96kbps mono mp3, return path."""
     template = str(out_dir / "%(id)s.%(ext)s")
-    subprocess.run(
-        [
-            "yt-dlp",
-            "-f", "bestaudio/best",
-            "-x",
-            "--audio-format", "mp3",
-            "--audio-quality", "96K",
-            "--postprocessor-args", "-ac 1",  # mono
-            "-o", template,
-            "--embed-metadata",
-            "--embed-thumbnail",
-            "--no-warnings",
-            url,
-        ],
-        check=True,
-    )
+    run_yt_dlp([
+        "-f", "bestaudio/best",
+        "-x",
+        "--audio-format", "mp3",
+        "--audio-quality", "96K",
+        "--postprocessor-args", "-ac 1",
+        "-o", template,
+        "--embed-metadata",
+        "--no-warnings",
+        url,
+    ])
     mp3s = list(out_dir.glob("*.mp3"))
     if not mp3s:
         raise RuntimeError("no mp3 produced")
