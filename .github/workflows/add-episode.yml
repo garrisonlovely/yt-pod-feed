@@ -1,0 +1,78 @@
+name: Add YouTube episode
+
+on:
+  repository_dispatch:
+    types: [add-episode]
+  workflow_dispatch:
+    inputs:
+      url:
+        description: "YouTube URL"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  add:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: add-episode
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Determine YT URL
+        id: url
+        run: |
+          if [ -n "${{ github.event.client_payload.url }}" ]; then
+            echo "url=${{ github.event.client_payload.url }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "url=${{ github.event.inputs.url }}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install ffmpeg + yt-dlp
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          python -m pip install --upgrade pip
+          pip install yt-dlp boto3
+
+      - name: Add episode
+        env:
+          YT_URL: ${{ steps.url.outputs.url }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_BUCKET: ${{ secrets.R2_BUCKET }}
+          R2_PUBLIC_BASE: ${{ secrets.R2_PUBLIC_BASE }}
+          EPISODE_PREFIX: "[YT] "
+        run: python3 scripts/add_episode.py
+
+      - name: Rebuild feed.xml
+        env:
+          FEED_TITLE: "Garrison's YouTube Pod Feed"
+          FEED_DESCRIPTION: "A personal podcast feed of YouTube videos extracted as audio."
+          FEED_LINK: "https://yt-pod-feed.netlify.app/"
+          FEED_AUTHOR: "Garrison Lovely"
+          FEED_EMAIL: "me@garrisonlovely.com"
+        run: python3 scripts/build_feed.py
+
+      - name: Commit + push manifest and feed
+        run: |
+          git config user.name  "yt-pod-bot"
+          git config user.email "bot@garrisonlovely.com"
+          git add episodes.json public/feed.xml
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Add episode via repository_dispatch"
+            git push
+          fi

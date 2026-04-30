@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+     xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+     xmlns:atom="http://www.w3.org/2005/Atom"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Garrison's YouTube Pod Feed</title>
+    <link>https://yt-pod-feed.netlify.app/</link>
+    <description>A personal podcast feed of YouTube videos extracted as audio.</description>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 30 Apr 2026 23:38:18 +0000</lastBuildDate>
+    <itunes:author>Garrison Lovely</itunes:author>
+    <itunes:summary>A personal podcast feed of YouTube videos extracted as audio.</itunes:summary>
+    <itunes:owner>
+      <itunes:name>Garrison Lovely</itunes:name>
+      <itunes:email>me@garrisonlovely.com</itunes:email>
+    </itunes:owner>
+    <itunes:category text="Technology"/>
+    <itunes:explicit>false</itunes:explicit>
+    <atom:link href="https://yt-pod-feed.netlify.app/feed.xml" rel="self" type="application/rss+xml"/>
+
+
+  </channel>
+</rss>
