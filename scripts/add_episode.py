@@ -45,19 +45,23 @@ def slugify(text: str, max_len: int = 60) -> str:
     return text[:max_len].strip("-").lower() or "episode"
 
 
-# yt-dlp args to bypass YouTube's bot detection on cloud IPs
-# tv_embedded + ios player clients still serve metadata + streams without auth
-YTDLP_BYPASS = [
-    "--extractor-args", "youtube:player_client=tv,ios,web_safari",
-    "--user-agent", "Mozilla/5.0 (iPhone; CPU iPhone OS 17_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Mobile/15E148 Safari/604.1",
-    "--retries", "3",
-    "--sleep-interval", "1",
-]
+# yt-dlp args to bypass YouTube's bot detection on cloud IPs.
+# Cookies are the only reliable path on GitHub Actions runners now.
+def _ytdlp_args() -> list:
+    args = [
+        "--extractor-args", "youtube:player_client=tv,ios,web_safari",
+        "--retries", "3",
+        "--sleep-interval", "1",
+    ]
+    cookies_path = os.environ.get("YT_COOKIES_FILE")
+    if cookies_path and os.path.exists(cookies_path):
+        args += ["--cookies", cookies_path]
+    return args
 
 
 def run_yt_dlp(args, **kw):
     proc = subprocess.run(
-        ["yt-dlp", *YTDLP_BYPASS, *args],
+        ["yt-dlp", *_ytdlp_args(), *args],
         capture_output=True, text=True, **kw,
     )
     if proc.returncode != 0:

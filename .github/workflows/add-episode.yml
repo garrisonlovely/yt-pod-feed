@@ -45,6 +45,19 @@ jobs:
           python -m pip install --upgrade pip
           pip install yt-dlp boto3
 
+      - name: Write YouTube cookies (if set)
+        env:
+          YT_COOKIES: ${{ secrets.YT_COOKIES }}
+        run: |
+          if [ -n "$YT_COOKIES" ]; then
+            printf '%s' "$YT_COOKIES" > /tmp/yt-cookies.txt
+            chmod 600 /tmp/yt-cookies.txt
+            echo "YT_COOKIES_FILE=/tmp/yt-cookies.txt" >> "$GITHUB_ENV"
+            echo "Cookies file written ($(wc -l < /tmp/yt-cookies.txt) lines)"
+          else
+            echo "No YT_COOKIES secret set — yt-dlp will run unauthenticated (will likely fail with bot check)"
+          fi
+
       - name: Add episode
         env:
           YT_URL: ${{ steps.url.outputs.url }}
