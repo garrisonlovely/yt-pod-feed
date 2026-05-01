@@ -34,6 +34,17 @@ def parse_dt(s: str) -> datetime:
         return datetime.now(timezone.utc)
 
 
+def format_yt_upload_date(s: str) -> str:
+    """yt-dlp returns upload_date as 'YYYYMMDD'; format as 'Mon DD, YYYY'."""
+    if not s or len(s) != 8:
+        return ""
+    try:
+        dt = datetime.strptime(s, "%Y%m%d")
+        return dt.strftime("%b %-d, %Y")  # e.g. "Apr 15, 2026"
+    except Exception:
+        return s
+
+
 def main():
     episodes = json.loads(EPISODES_PATH.read_text() or "[]")
     # newest first
@@ -44,7 +55,6 @@ def main():
     items_xml = []
     for ep in episodes:
         title = escape(ep.get("title", "Untitled"))
-        description = escape(ep.get("description", ""))
         audio_url = ep.get("audio_url", "")
         audio_size = ep.get("audio_size_bytes", 0)
         duration = ep.get("duration_seconds", 0)
@@ -53,6 +63,22 @@ def main():
         thumbnail = ep.get("thumbnail_url", "") or FEED_IMAGE
         yt_url = ep.get("yt_url", "")
         author = escape(ep.get("uploader", FEED_AUTHOR))
+
+        # Build description with YT upload date prepended
+        yt_date = format_yt_upload_date(ep.get("upload_date", ""))
+        original_desc = ep.get("description", "")
+        preamble_lines = []
+        if yt_date:
+            preamble_lines.append(f"Uploaded to YouTube: {yt_date}")
+        if ep.get("uploader"):
+            preamble_lines.append(f"Channel: {ep['uploader']}")
+        if yt_url:
+            preamble_lines.append(f"Source: {yt_url}")
+        preamble = "\n".join(preamble_lines)
+        if preamble:
+            full_desc = preamble + "\n\n---\n\n" + original_desc
+        else:
+            full_desc = original_desc
 
         link_block = ""
         if yt_url:
@@ -65,7 +91,7 @@ def main():
         items_xml.append(f"""    <item>
       <title>{title}</title>
       {link_block}
-      <description><![CDATA[{ep.get("description", "")}]]></description>
+      <description><![CDATA[{full_desc}]]></description>
       <pubDate>{pub_rfc}</pubDate>
       <guid isPermaLink="false">{escape(guid)}</guid>
       <enclosure url="{escape(audio_url)}" length="{audio_size}" type="audio/mpeg"/>
