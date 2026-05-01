@@ -48,17 +48,21 @@ def slugify(text: str, max_len: int = 60) -> str:
 # yt-dlp args to bypass YouTube's bot detection on cloud IPs.
 # Cookies are the only reliable path on GitHub Actions runners now.
 def _ytdlp_args() -> list:
-    # mweb is the most reliable client for cloud runners as of late 2025 —
-    # doesn't need PO Token, and isn't blocked when paired with cookies.
-    args = [
-        "--extractor-args", "youtube:player_client=mweb,android,ios",
-        "--retries", "3",
-        "--sleep-interval", "1",
-        "--verbose",  # surface warnings so failure modes are visible
-    ]
+    """yt-dlp args. Auth path (in priority order):
+    1. YT_COOKIES_FROM_BROWSER env var → --cookies-from-browser <name> (Mac-local path)
+    2. YT_COOKIES_FILE pointing to a Netscape-format file (cloud path)
+    3. unauthenticated (will fail on cloud IPs, may work locally)
+    """
+    args = ["--retries", "3", "--sleep-interval", "1"]
+
+    browser = os.environ.get("YT_COOKIES_FROM_BROWSER")
     cookies_path = os.environ.get("YT_COOKIES_FILE")
-    if cookies_path and os.path.exists(cookies_path):
+    if browser:
+        args += ["--cookies-from-browser", browser]
+    elif cookies_path and os.path.exists(cookies_path):
         args += ["--cookies", cookies_path]
+    else:
+        args += ["--extractor-args", "youtube:player_client=tv,ios"]
     return args
 
 
