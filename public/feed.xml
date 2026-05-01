@@ -8,7 +8,7 @@
     <link>https://yt-pod-feed.netlify.app/</link>
     <description>A personal podcast feed of YouTube videos extracted as audio.</description>
     <language>en-us</language>
-    <lastBuildDate>Thu, 30 Apr 2026 23:38:18 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 01 May 2026 00:25:50 +0000</lastBuildDate>
     <itunes:author>Garrison Lovely</itunes:author>
     <itunes:summary>A personal podcast feed of YouTube videos extracted as audio.</itunes:summary>
     <itunes:owner>
@@ -19,6 +19,19 @@
     <itunes:explicit>false</itunes:explicit>
     <atom:link href="https://yt-pod-feed.netlify.app/feed.xml" rel="self" type="application/rss+xml"/>
 
-
+    <item>
+      <title>[YT] Hassabis on an AI Shift Bigger Than Industrial Age</title>
+      <link>https://www.youtube.com/watch?v=BbIaYFHxW3Y</link>
+      <description><![CDATA[Demis Hassabis, Co-Founder & CEO of Google DeepMind, discusses the years ahead in artificial intelligence, including advances in foundational models, real-world applications and responsible AI development, with Bloomberg’s Emily Chang at Bloomberg House in Davos on the sidelines of the 2026 World Economic Forum.
+--------
+Subscribe to Bloomberg Live on YouTube: https://www.youtube.com/channel/UC7UFcUbAd8oyCBWCogVpJ6g?sub_confirmation=1]]></description>
+      <pubDate>Fri, 01 May 2026 00:25:22 +0000</pubDate>
+      <guid isPermaLink="false">BbIaYFHxW3Y</guid>
+      <enclosure url="https://pub-51495ffc2fcc49d1a6b45df402efbc56.r2.dev/audio/BbIaYFHxW3Y-hassabis-on-an-ai-shift-bigger-than-industrial-age.mp3" length="18760527" type="audio/mpeg"/>
+      <itunes:duration>1563</itunes:duration>
+      <itunes:author>Bloomberg Live</itunes:author>
+      <itunes:image href="https://i.ytimg.com/vi/BbIaYFHxW3Y/maxresdefault.jpg"/>
+      <itunes:explicit>false</itunes:explicit>
+    </item>
   </channel>
 </rss>
