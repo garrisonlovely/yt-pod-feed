@@ -8,7 +8,7 @@
     <link>https://yt-pod-feed.netlify.app/</link>
     <description>A personal podcast feed of YouTube videos extracted as audio.</description>
     <language>en-us</language>
-    <lastBuildDate>Fri, 01 May 2026 00:25:50 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 01 May 2026 00:36:23 +0000</lastBuildDate>
     <itunes:author>Garrison Lovely</itunes:author>
     <itunes:summary>A personal podcast feed of YouTube videos extracted as audio.</itunes:summary>
     <itunes:owner>
@@ -19,6 +19,22 @@
     <itunes:explicit>false</itunes:explicit>
     <atom:link href="https://yt-pod-feed.netlify.app/feed.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>[YT] LIVE: The Existential Threat of AI and the Need for International Cooperation</title>
+      <link>https://www.youtube.com/live/wjBfS3AEk2c?si=ssb0lAfvjrp886qN</link>
+      <description><![CDATA[The people building AI admit they may not be able to control it.
+
+This is not science fiction—this is what experts are telling us.
+
+That’s why I’m bringing together leading AI scientists from the U.S. and China to discuss the risks posed by AI.]]></description>
+      <pubDate>Fri, 01 May 2026 00:30:15 +0000</pubDate>
+      <guid isPermaLink="false">wjBfS3AEk2c</guid>
+      <enclosure url="https://pub-51495ffc2fcc49d1a6b45df402efbc56.r2.dev/audio/wjBfS3AEk2c-live-the-existential-threat-of-ai-and-the-need-for-internati.mp3" length="55022546" type="audio/mpeg"/>
+      <itunes:duration>4585</itunes:duration>
+      <itunes:author>Senator Bernie Sanders</itunes:author>
+      <itunes:image href="https://i.ytimg.com/vi/wjBfS3AEk2c/maxresdefault.jpg"/>
+      <itunes:explicit>false</itunes:explicit>
+    </item>
     <item>
       <title>[YT] Hassabis on an AI Shift Bigger Than Industrial Age</title>
       <link>https://www.youtube.com/watch?v=BbIaYFHxW3Y</link>
