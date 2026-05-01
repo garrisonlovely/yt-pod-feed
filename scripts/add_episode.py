@@ -48,12 +48,13 @@ def slugify(text: str, max_len: int = 60) -> str:
 # yt-dlp args to bypass YouTube's bot detection on cloud IPs.
 # Cookies are the only reliable path on GitHub Actions runners now.
 def _ytdlp_args() -> list:
-    # tv,ios clients sidestep YouTube's PO Token requirement that breaks the web client.
-    # Still need cookies on cloud IPs for bot-check bypass.
+    # mweb is the most reliable client for cloud runners as of late 2025 —
+    # doesn't need PO Token, and isn't blocked when paired with cookies.
     args = [
-        "--extractor-args", "youtube:player_client=tv,ios",
+        "--extractor-args", "youtube:player_client=mweb,android,ios",
         "--retries", "3",
         "--sleep-interval", "1",
+        "--verbose",  # surface warnings so failure modes are visible
     ]
     cookies_path = os.environ.get("YT_COOKIES_FILE")
     if cookies_path and os.path.exists(cookies_path):
@@ -76,7 +77,8 @@ def run_yt_dlp(args, **kw):
 
 def fetch_metadata(url: str) -> dict:
     """Use yt-dlp to get video metadata without downloading."""
-    result = run_yt_dlp(["-J", "--no-warnings", url])
+    result = run_yt_dlp(["-J", url])
+    # -J output is on stdout; verbose info goes to stderr, so parse stdout only
     return json.loads(result.stdout)
 
 
