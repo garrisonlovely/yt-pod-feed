@@ -8,7 +8,7 @@
     <link>https://yt-pod-feed.netlify.app/</link>
     <description>A personal podcast feed of YouTube videos extracted as audio.</description>
     <language>en-us</language>
-    <lastBuildDate>Fri, 01 May 2026 00:41:56 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 01 May 2026 01:03:03 +0000</lastBuildDate>
     <itunes:author>Garrison Lovely</itunes:author>
     <itunes:summary>A personal podcast feed of YouTube videos extracted as audio.</itunes:summary>
     <itunes:owner>
@@ -19,6 +19,24 @@
     <itunes:explicit>false</itunes:explicit>
     <atom:link href="https://yt-pod-feed.netlify.app/feed.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>[YT] Hank and Bernie talk about AI (for real)</title>
+      <link>https://youtu.be/hLcY30KEeNs?si=LFzazWclzZ62697Y</link>
+      <description><![CDATA[Uploaded to YouTube: Apr 7, 2026
+Channel: Hank Green
+Source: https://youtu.be/hLcY30KEeNs?si=LFzazWclzZ62697Y
+
+---
+
+Bernie and I do not agree on everything, but we agree on a lot!! I wish we could’ve talked longer but here’s where we went!]]></description>
+      <pubDate>Fri, 01 May 2026 01:00:03 +0000</pubDate>
+      <guid isPermaLink="false">hLcY30KEeNs</guid>
+      <enclosure url="https://pub-51495ffc2fcc49d1a6b45df402efbc56.r2.dev/audio/hLcY30KEeNs-hank-and-bernie-talk-about-ai-for-real.mp3" length="22244706" type="audio/mpeg"/>
+      <itunes:duration>1854</itunes:duration>
+      <itunes:author>Hank Green</itunes:author>
+      <itunes:image href="https://i.ytimg.com/vi/hLcY30KEeNs/maxresdefault.jpg"/>
+      <itunes:explicit>false</itunes:explicit>
+    </item>
     <item>
       <title>[YT] LIVE: The Existential Threat of AI and the Need for International Cooperation</title>
       <link>https://www.youtube.com/live/wjBfS3AEk2c?si=ssb0lAfvjrp886qN</link>
