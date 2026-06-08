@@ -8,7 +8,7 @@
     <link>https://yt-pod-feed.netlify.app/</link>
     <description>A personal podcast feed of YouTube videos extracted as audio.</description>
     <language>en-us</language>
-    <lastBuildDate>Fri, 01 May 2026 01:03:03 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 08 Jun 2026 21:33:06 +0000</lastBuildDate>
     <itunes:author>Garrison Lovely</itunes:author>
     <itunes:summary>A personal podcast feed of YouTube videos extracted as audio.</itunes:summary>
     <itunes:owner>
@@ -19,6 +19,26 @@
     <itunes:explicit>false</itunes:explicit>
     <atom:link href="https://yt-pod-feed.netlify.app/feed.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>[YT] OpenAI - Fireside Chat with Tyler Cowen and Alex Tabarrok</title>
+      <link>https://www.youtube.com/watch?v=eAq1GBUzmlk&amp;t=2s</link>
+      <description><![CDATA[Uploaded to YouTube: Jun 6, 2026
+Channel: Wyatt Thompson
+Source: https://www.youtube.com/watch?v=eAq1GBUzmlk&t=2s
+
+---
+
+We recently had the chance to chat privately with Tyler Cowen and Alex Tabarrok about the impact of AI on the future of labor. One theme stood out: economic growth matters. It drives opportunity, innovation, and human flourishing.
+
+Here's the conversation.]]></description>
+      <pubDate>Mon, 08 Jun 2026 21:32:05 +0000</pubDate>
+      <guid isPermaLink="false">eAq1GBUzmlk</guid>
+      <enclosure url="https://pub-51495ffc2fcc49d1a6b45df402efbc56.r2.dev/audio/eAq1GBUzmlk-openai-fireside-chat-with-tyler-cowen-and-alex-tabarrok.mp3" length="40663138" type="audio/mpeg"/>
+      <itunes:duration>3388</itunes:duration>
+      <itunes:author>Wyatt Thompson</itunes:author>
+      <itunes:image href="https://i.ytimg.com/vi/eAq1GBUzmlk/maxresdefault.jpg"/>
+      <itunes:explicit>false</itunes:explicit>
+    </item>
     <item>
       <title>[YT] Hank and Bernie talk about AI (for real)</title>
       <link>https://youtu.be/hLcY30KEeNs?si=LFzazWclzZ62697Y</link>
