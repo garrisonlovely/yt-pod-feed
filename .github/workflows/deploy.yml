@@ -1,11 +1,10 @@
 name: Deploy to Netlify
 
+# NOTE: push trigger removed 2026-06-25. Deploys now run locally from
+# scripts/yt2pod.sh (the Mac's netlify CLI is authenticated). This Action's
+# NETLIFY_AUTH_TOKEN secret kept expiring and emailed failures on every push.
+# Kept as a manual fallback only — rotate the secret before using it.
 on:
-  push:
-    branches: [master]
-    paths:
-      - "public/**"
-      - "netlify.toml"
   workflow_dispatch:
 
 jobs:
