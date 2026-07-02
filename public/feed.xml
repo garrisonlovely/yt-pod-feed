@@ -8,7 +8,7 @@
     <link>https://yt-pod-feed.netlify.app/</link>
     <description>A personal podcast feed of YouTube videos extracted as audio.</description>
     <language>en-us</language>
-    <lastBuildDate>Thu, 25 Jun 2026 22:46:07 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 02 Jul 2026 09:36:44 +0000</lastBuildDate>
     <itunes:author>Garrison Lovely</itunes:author>
     <itunes:summary>A personal podcast feed of YouTube videos extracted as audio.</itunes:summary>
     <itunes:owner>
@@ -19,6 +19,23 @@
     <itunes:explicit>false</itunes:explicit>
     <atom:link href="https://yt-pod-feed.netlify.app/feed.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>AI &amp; the Left test ep w/ Cassie Pritchard (6/29/26)</title>
+      
+      <description><![CDATA[Uploaded to YouTube: Jun 29, 2026
+Channel: Garrison Lovely
+
+---
+
+Test episode recording for the new AI-and-the-left video podcast, co-hosted with Cassie Pritchard. Recorded at Public Sound Studios, Brooklyn, 6/29/26. Assembly cut v1.]]></description>
+      <pubDate>Thu, 02 Jul 2026 09:36:38 +0000</pubDate>
+      <guid isPermaLink="false">test-podcast-ai-and-the-left-062926</guid>
+      <enclosure url="https://pub-51495ffc2fcc49d1a6b45df402efbc56.r2.dev/audio/test-podcast-ai-and-the-left-062926.mp3" length="116062402" type="audio/mpeg"/>
+      <itunes:duration>7254</itunes:duration>
+      <itunes:author>Garrison Lovely</itunes:author>
+      
+      <itunes:explicit>false</itunes:explicit>
+    </item>
     <item>
       <title>Punchbowl News — Tech Quarterly Interview (June 2026)</title>
       <link>https://punchbowl.news/wp-content/uploads/Tech-quarterly-interview-june-2026.mp3</link>
